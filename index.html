@@ -1,0 +1,22 @@
+<label for="name">이름</label>
+<input type="text" id="name">
+<label for="email">이메일</label>
+<input type="text" id="email">
+<h2 id="email-view">이메일</h2>
+<h2 id="name-view">이름</h2>
+
+<script>
+  const nameInput = document.querySelector('#name');
+  const emailInput = document.querySelector('#email');
+  const nameView = document.querySelector('#name-view');
+  const emailView = document.querySelector('#email-view');
+
+  const changeValue = ({ target, keyCode }) => {
+    if (keyCode !== 13) return;
+
+    target === nameInput ? nameView.textContent = `이름 ${target.value}` : emailView.textContent = `이메일 ${target.value}`;
+  }
+
+  nameInput.onchange = changeValue;
+  emailInput.onchange = changeValue;
+</script>

@@ -1,12 +1,9 @@
 import React from 'react';
-import Hello from './Hello';
-import Wrapper from './Wrapper';
+import InputWrapper from './InputWrapper';
 
 function App() {
   return (
-    <Wrapper>
-      <Hello name="react" color="red" />
-    </Wrapper>
+    <InputWrapper />
   );
 }
 

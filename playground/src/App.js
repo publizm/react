@@ -6,6 +6,7 @@ function App() {
   const [ inputs, setInputs ] = useState({
     username: '',
     email: '',
+    active: false,
   }); // 초기값 세팅
   const { username, email } = inputs;
 
@@ -13,17 +14,20 @@ function App() {
     {
       id: 1,
       username: 'publee',
-      email: 'publizm@gmail.com'
+      email: 'publizm@gmail.com',
+      active: true,
     },
     {
       id: 2,
       username: 'tester',
-      email: 'tester@gmail.com'
+      email: 'tester@gmail.com',
+      active: false,
     },
     {
       id: 3,
       username: 'liz',
-      email: 'liz@gmail.com'
+      email: 'liz@gmail.com',
+      active: false,
     }
   ]);
 
@@ -33,7 +37,7 @@ function App() {
     const newUser = {
       id: nextId.current,
       username,
-      email
+      email,
     };
 
     setUsers([...users, newUser]);
@@ -58,10 +62,14 @@ function App() {
     setUsers(users.filter(user => user.id !== id));
   };
 
+  const onToggle = id => {
+    setUsers(users.map(user => user.id === id ? { ...user, active: !user.active } : user));
+  };
+
   return (
     <>
       <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} />
-      <UserList users={users} onRemove={onRemove} />
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
     </>
   );
 }

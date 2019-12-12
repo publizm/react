@@ -30,9 +30,8 @@ function App() {
   const nextId = useRef(4); // 컴포넌트가 리렌더링 될때마다 특정 값을 기억해야될때도 사용을 한다, 해당 변수의 값이 바뀔때 컴포넌트가 리렌더링 되지 않는다.
 
   const onCreate = e => {
-    nextId.current += 1;
     const newUser = {
-      id: nextId,
+      id: nextId.current,
       username,
       email
     };
@@ -43,6 +42,8 @@ function App() {
       username: '',
       email: '',
     });
+
+    nextId.current += 1;
   }
 
   const onChange = e => {
@@ -53,10 +54,14 @@ function App() {
     })
   }
 
+  const onRemove = id => {
+    setUsers(users.filter(user => user.id !== id));
+  };
+
   return (
     <>
       <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} />
-      <UserList users={users} />
+      <UserList users={users} onRemove={onRemove} />
     </>
   );
 }

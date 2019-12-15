@@ -22,7 +22,6 @@ const Profiles = () => {
         render={() => <Sample data="data" />}
       />
       <Route path="/profiles/:username" component={Profile} />
-
     </div>
   );
 }

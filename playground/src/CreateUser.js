@@ -3,7 +3,7 @@ import { UserDispatch } from './App';
 import useInputs from './useInputs';
 
 function CreateUser() {
-  const [{username, email}, onChange, reset] = useInputs({
+  const [{ username, email }, onChange, reset] = useInputs({
     username: '',
     email: '',
   });
@@ -16,12 +16,12 @@ function CreateUser() {
       user: {
         id: nextId.current,
         username,
-        email
-      }
+        email,
+      },
     });
     reset();
     nextId.current += 1;
-  }
+  };
 
   const dispatch = useContext(UserDispatch);
   return (
@@ -33,16 +33,10 @@ function CreateUser() {
         value={username}
         onChange={onChange}
       />
-      <input
-        type="text"
-        name="email"
-        placeholder="이메일"
-        value={email}
-        onChange={onChange}
-      />
+      <input type="text" name="email" placeholder="이메일" value={email} onChange={onChange} />
       <button onClick={onCreate}>등록</button>
     </div>
-  )
+  );
 }
 
 export default React.memo(CreateUser);

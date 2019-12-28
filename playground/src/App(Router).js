@@ -23,6 +23,6 @@ const App = () => {
       <Route path="/profiles" component={Profiles} />
     </div>
   );
-}
+};
 
 export default App;

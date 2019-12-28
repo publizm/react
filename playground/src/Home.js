@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Home = () => {
+  useEffect(() => {
+    console.log('홈 컴포넌트가 화면에서 나타남');
+    return () => {
+      console.log('홈 컴포넌트가 화면에서 사라짐');
+    };
+  }, []);
   return (
     <div>
       <h1>홈</h1>
-      <p>이곳은 홈이에요. 가장 먼저 보여지는 페이지죠.</p>
+      <p>Home 페이지</p>
     </div>
   );
-}
+};
 
 export default Home;

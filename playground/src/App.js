@@ -1,4 +1,4 @@
-import React, { useRef, useReducer, useMemo, useCallback, createContext } from 'react';
+import React, { useReducer, useMemo, createContext } from 'react';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
 
@@ -13,49 +13,46 @@ const initialState = {
       id: 1,
       username: 'velopert',
       email: 'public.velopert@gmail.com',
-      active: true
+      active: true,
     },
     {
       id: 2,
       username: 'tester',
       email: 'tester@example.com',
-      active: false
+      active: false,
     },
     {
       id: 3,
       username: 'liz',
       email: 'liz@example.com',
-      active: false
-    }
-  ]
-}
+      active: false,
+    },
+  ],
+};
 
 function reducer(state, action) {
   switch (action.type) {
     case 'CREATE_USER':
       return {
-        inputs: initialState.inputs,
-        users: state.users.concat(action.user)
+        users: state.users.concat(action.user),
       };
     case 'TOGGLE_USER':
       return {
         ...state,
         users: state.users.map(user =>
-          user.id === action.id
-            ? {...user, active: !user.active}
-            : user
-          )
+          user.id === action.id ? { ...user, active: !user.active } : user,
+        ),
       };
     case 'REMOVE_USER':
       return {
         ...state,
-        users: state.users.filter(user => user.id !== action.id)
-      }
+        users: state.users.filter(user => user.id !== action.id),
+      };
 
     default:
       throw new Error('Unhandled action');
   }
-};
+}
 
 export const UserDispatch = createContext(null);
 

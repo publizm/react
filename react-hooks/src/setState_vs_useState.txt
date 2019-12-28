@@ -1,0 +1,21 @@
+this.setState
+기존 상태를 유지 + 병합
+
+state = {lang: 'js'}
+this.setState({ new: 'react' })
+// 결과
+{
+  lang: 'js',
+  (+) new: 'react'
+}
+
+vs
+
+React Hook useState
+기존상태 X, 파라미터로 받은 새로운 상태만 업데이트
+
+state = {lang: 'js'}
+상태변화함수({ new: 'react' })
+// 결과
+{ new: 'react' }
+

@@ -32,6 +32,8 @@ function useKeyPress(targetKey) {
 export default function CustomHook() {
   const aPressed = useKeyPress('a');
   const bPressed = useKeyPress('b');
+
+  console.log(aPressed);
   return (
     <>
       <div>

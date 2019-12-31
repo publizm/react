@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function useInput(defaultValue) {
-  const [value, setValue] = useState(defaultValue);
-  function onChange(e) {
-    const { value } = e.target;
-    setValue(value);
-  }
-
-  return { value, onChange };
-}
-
 function useFetch(url) {
   const [payload, setPayload] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,16 +24,11 @@ function useFetch(url) {
   return { payload, loading, error };
 }
 
-export default function CustomInput() {
-  const name = useInput('');
+export default function CustomFetch() {
   const { payload, loading, error } = useFetch('http://aws.random.cat/meow');
-  console.log(name);
   return (
     <div>
-      <h1>UseInputs</h1>
-      {/* 동일 */}
-      {/* <input value={name.value} onChange={name.onChange} type="text" /> */}
-      <input {...name} type="text" />
+      <h1>UseFetch</h1>
       {loading && <span>loading your cat</span>}
       {!loading && error && <span>{error}</span>}
       {!loading && payload && <img src={payload.file} alt="ㅎㅎㅎ" />}

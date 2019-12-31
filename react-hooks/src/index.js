@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import CustomInput from './CustomInput';
+import CustomFetch from './customHooks/CustomFetch';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<CustomInput />, document.getElementById('root'));
+ReactDOM.render(<CustomFetch />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

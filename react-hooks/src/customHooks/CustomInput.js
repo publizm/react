@@ -1,25 +1,31 @@
 import React, { useState } from 'react';
 
-function useInput(defaultValue) {
-  const [value, setValue] = useState(defaultValue);
-  function onChange(e) {
+export const useInput = (initailValue, validator) => {
+  console.log('validator', validator);
+  const [value, setValue] = useState(initailValue);
+  const onChange = e => {
     const { value } = e.target;
-    setValue(value);
-  }
+    let willUpdate = true;
+    if (typeof validator === 'function') {
+      willUpdate = validator(value);
+    }
+    if (willUpdate) {
+      setValue(value);
+    }
+  };
 
   return { value, onChange };
-}
+};
 
-export default function CustomInput() {
-  const input = useInput('');
-  console.log(input);
-  return (
-    <div>
-      <h1>UseInputs</h1>
-      {/* 동일 */}
-      {/* <input value={name.value} onChange={name.onChange} type="text" /> */}
-      <input {...input} type="text" />
-      {input.value}
-    </div>
-  );
-}
+// 사용예시
+// export default function CustomInput() {
+//   // const maxLength = value => value.length <= 10;
+//   const maxLength = value => !value.includes('@');
+//   const name = useInput('Mr.', maxLength);
+//   return (
+//     <div>
+//       <h1>UseInputs</h1>
+//       <input {...name} placeHolder="Name" type="text" />
+//     </div>
+//   );
+// }

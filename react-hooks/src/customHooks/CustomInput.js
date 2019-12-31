@@ -3,12 +3,16 @@ import React, { useState } from 'react';
 export const useInput = (initailValue, validator) => {
   console.log('validator', validator);
   const [value, setValue] = useState(initailValue);
+
   const onChange = e => {
     const { value } = e.target;
+
     let willUpdate = true;
+
     if (typeof validator === 'function') {
       willUpdate = validator(value);
     }
+
     if (willUpdate) {
       setValue(value);
     }

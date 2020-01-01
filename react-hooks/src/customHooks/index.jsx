@@ -7,13 +7,12 @@ import { useTitle } from './CustomTitle';
 import { useClick } from './CustomClick';
 import { useConfirm } from './CustomConfirm';
 import { usePreventLeave } from './CustomPreventLeave';
+import { useBeforeLeave } from './CustomBeforeLeave';
 
 export default function Custom() {
-  const { enablePrevent, disablePrevent } = usePreventLeave();
   return (
     <>
-      <button onClick={enablePrevent}>Protect</button>
-      <button onClick={disablePrevent}>UnProtect</button>
+      <h1>Hello</h1>
     </>
   );
 }

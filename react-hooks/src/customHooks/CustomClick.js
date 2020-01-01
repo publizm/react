@@ -21,3 +21,16 @@ export const useClick = onClick => {
 
   return element;
 };
+
+// 사용예시
+// export default function Custom() {
+//   const sayHello = () => {
+//     console.log('say HEllo')
+//   }
+//   const title = useClick(sayHello);
+//   return (
+//     <>
+//       <h1 ref={title}>Hi!</h1>
+//     </>
+//   );
+// }

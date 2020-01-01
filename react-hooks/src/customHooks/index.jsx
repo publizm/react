@@ -5,15 +5,15 @@ import { useFetch } from './CustomFetch';
 import { useTabs } from './CustomTabs';
 import { useTitle } from './CustomTitle';
 import { useClick } from './CustomClick';
+import { useConfirm } from './CustomConfirm';
 
 export default function Custom() {
-  const sayHello = () => {
-    console.log('say HEllo')
-  }
-  const title = useClick(sayHello);
+  const deleteWorld = () => console.log('Deleting the world');
+  const abort = () => console.log('aborted');
+  const confirmDelete = useConfirm('Are you sure', deleteWorld, abort)
   return (
     <>
-      <h1 ref={title}>Hi!</h1>
+      <button onClick={confirmDelete}>Delete the world</button>
     </>
   );
 }

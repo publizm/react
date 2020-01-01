@@ -11,3 +11,15 @@ export const useConfirm = (message = '', onConfirm, onCancel) => {
 
   return confirmAction;
 };
+
+// 사용예시
+// export default function Custom() {
+//   const deleteWorld = () => console.log('Deleting the world');
+//   const abort = () => console.log('aborted');
+//   const confirmDelete = useConfirm('Are you sure', deleteWorld, abort)
+//   return (
+//     <>
+//       <button onClick={confirmDelete}>Delete the world</button>
+//     </>
+//   );
+// }

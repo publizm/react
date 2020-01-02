@@ -27,10 +27,15 @@ export const useClick = onClick => {
 //   const sayHello = () => {
 //     console.log('say HEllo')
 //   }
-//   const title = useClick(sayHello);
+//   const sayBye = () => {
+//     console.log('say HEllo')
+//   }
+//   const hi = useClick(sayHello);
+//   const bye = useClick(sayBye);
 //   return (
 //     <>
-//       <h1 ref={title}>Hi!</h1>
+//       <h1 ref={hi}>Hi!</h1>
+//       <h2 ref={bye}>Hi!</h2>
 //     </>
 //   );
 // }

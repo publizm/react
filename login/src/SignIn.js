@@ -10,8 +10,7 @@ const SignIn = props => {
     const { success, token } = await signIn(values);
     if (success) {
       Cookies.set('session', token.split(' ')[1]);
-      console.log(Cookies.get('session'));
-      // props.history.push('/');
+      props.history.push('/user');
     }
   };
 

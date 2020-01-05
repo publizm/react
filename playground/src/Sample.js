@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Sample = (props) => {
-  console.log(props);
-  return (
-    <div>
-      {props.data}
-    </div>
-  );
-}
+const Name = ({ name }) => {
+  return <div>Hi! {name}</div>;
+};
 
-export default Sample;
+Name.defaultProps = {
+  name: 'publizm',
+};
+
+export default Name;

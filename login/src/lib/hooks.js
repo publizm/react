@@ -11,7 +11,7 @@ export const useAuthed = () => {
       // 백엔드 쪽에서 sign 하여 만들어진다.
       const session = Cookies.get('session');
       const key = process.env.REACT_APP_JWT_KEY;
-      const res = jwt.verify(session, key);
+      const res = jwt.verify(session, key); // decoded 된 값을 반환.
       return res;
     } catch (err) {
       return false;

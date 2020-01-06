@@ -20,7 +20,7 @@ const SignUp = props => {
     <section>
       {alreadyExist && '이미 존재하는 아이디 입니다.'}
       <form
-        // onSubmit(내장 props), handleSubmit(onSubmit) - 커스텀 hook의 함수
+        // onSubmit(내장 props), handleSubmit(onSubmit) - 커스텀 hook의 함수, handleSubmit은 라이브러리의 함수
         onSubmit={handleSubmit(onSubmit)}
       >
         <fieldset>

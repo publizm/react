@@ -9,7 +9,8 @@ const SignIn = props => {
   const onSubmit = async values => {
     const { success, token } = await signIn(values);
     if (success) {
-      Cookies.set('session', token.split(' ')[1]);
+      // 백엔드가 만들어주지 않았을 경우에 token을 받아서 따로 쿠키에 저장해줘야된다.
+      // Cookies.set('session', token.split(' ')[1]);
       props.history.push('/user');
     }
   };

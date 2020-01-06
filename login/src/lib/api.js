@@ -18,12 +18,11 @@ export const signIn = async ({ username, password }) => {
 };
 
 export const signOut = async session => {
-  console.log(session);
   const headers = {
     Authorization: `jwt ${session}`,
   };
   // 토큰 값을 지정하여 해당 내용 삭제
-  const { data } = await axios.get('http://localhost:4000/api/signout', headers);
+  const { data } = await axios.get('http://localhost:4000/api/signout', { headers }); // header와 위의 변수 headers가 이름이 같아 객체 구조분해를 하여 전달
   return data;
 };
 
@@ -33,6 +32,6 @@ export const user = async session => {
     Authorization: `jwt ${session}`,
   };
   // 헤더만 설정하여 전달
-  const { data } = await axios.get('http://localhost:4000/api/user', headers);
+  const { data } = await axios.get('http://localhost:4000/api/user', { headers });
   return data;
 };

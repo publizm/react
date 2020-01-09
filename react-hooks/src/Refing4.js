@@ -3,6 +3,7 @@ import { isEqual } from 'lodash';
 
 // prev값을 기억하기위한 커스텀 훅
 const usePrev = value => {
+  console.log('usePrev!');
   const ref = useRef();
 
   useEffect(() => {
@@ -23,10 +24,11 @@ export default function Refing4() {
   const prevUser = usePrev(user);
 
   useEffect(() => {
+    console.log('useEffect!');
     // user라는 상태가 업데이트 됬을때만 실행
     // count가 변할때만 console.log가 실행되야하는 로직인데, 매번 실행된다
     // console.log('updated');
-    // 의존성 배열을 검사할때 리액트는 얕은 검사를 하기 때문에 얕은 검사에 의해 변화가 생기면 실행을 시킨다.
+    // 의존성 배열을 검사할때 리액트는 얕은 검사를 하기 때문에 얕은 검사에 의해 변화가 생기면 실행을 시킨다, 하지만 return문안의 값을 검사할때는 참조값까지 검사하는 깊은 검사를 하는데 이것 때문에 나오는 문제가 useCall이 나오는 것이다.
     // 하지만 user는 현재 객체이기 때문에 얕은 검사시 참조값만 검사를 하기 때문에 객체이거나 함수일때 항상 변하는 값이 된다.
 
     // 깊은 검사를 하기위해 lodash의 isEqual를 활용

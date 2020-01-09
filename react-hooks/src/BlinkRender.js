@@ -11,5 +11,5 @@ export default function BlinkRender() {
 
   console.log('render', value);
 
-  return <div onClick={() => setValue(0)}>value: {value}</div>;
+  return <button onClick={() => setValue(0)}>value: {value}</button>;
 }

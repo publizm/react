@@ -5,14 +5,13 @@ import Cookies from 'js-cookie';
 
 const SignIn = props => {
   const { handleSubmit, register, errors } = useForm();
-  const [checkId, setCheckId] = useState(false);
 
   const onSubmit = async ({ username, password }) => {
     const { success, token } = await signIn({ username, password });
     if (success) {
       Cookies.set('session', token.split(' ')[1]);
 
-      props.history.push('/User');
+      props.history.push('/user');
     }
   };
 

@@ -5,6 +5,7 @@ import { useAuthed } from '../../libs/hooks';
 import jwt from 'jsonwebtoken';
 
 const User = props => {
+  console.log('user', props);
   const [username, setUsername] = useState('');
   // Authed로 인해 User에서 따로 verify를 할 필요가 없어졌다.
   const { username: user } = useAuthed();

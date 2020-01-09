@@ -10,7 +10,7 @@ const SignUp = props => {
     const { success, msg } = await signUp(values);
     console.log(success, msg);
     if (success) {
-      props.history.push('/signIn');
+      props.history.push('/signin');
     } else if (msg === 'Username already exists.') {
       setAlreadyExist(true);
     }

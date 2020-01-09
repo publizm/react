@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { signUp } from './lib/api';
-import Cookies from 'js-cookie';
+import { signUp } from '../../libs/api';
 
 const SignUp = props => {
   const { handleSubmit, register, watch, errors } = useForm();
@@ -9,73 +8,79 @@ const SignUp = props => {
 
   const onSubmit = async values => {
     const { success, msg } = await signUp(values);
+    console.log(success, msg);
     if (success) {
-      props.history.push('/signin');
+      props.history.push('/signIn');
     } else if (msg === 'Username already exists.') {
       setAlreadyExist(true);
     }
   };
 
   return (
-    <section>
-      {alreadyExist && '이미 존재하는 아이디 입니다.'}
-      <form
-        // onSubmit(내장 props), handleSubmit(onSubmit) - 커스텀 hook의 함수, handleSubmit은 라이브러리의 함수
-        onSubmit={handleSubmit(onSubmit)}
-      >
+    <h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
-          <legend>회원가입 영역</legend>
-          <div>
-            <label htmlFor="username">이메일　　　　</label>
+          <legend>회원가입</legend>
+          {alreadyExist && '이미 존재하는 아이디입니다.'}
+          <div className="col">
+            <label htmlFor="username">이메일</label>
             <input
+              type="text"
               id="username"
               name="username"
-              type="text"
               ref={register({
-                required: 'Required',
+                required: '필수입력사항 입니다.',
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: 'invalid email address',
+                  message: '유효하지 않는 이메일 형식입니다.',
+                },
+                maxLength: {
+                  value: 20,
+                  message: '글이 넘침',
                 },
               })}
               placeholder="이메일을 입력해주세요"
             />
-            {errors.username && errors.username.message}
+            <p className="notice">
+              {errors.username && errors.username.message}
+            </p>
           </div>
-          <div>
-            <label htmlFor="password1">비밀번호　　　</label>
+          <div className="col">
+            <label htmlFor="password1">비밀번호</label>
             <input
+              type="password"
               id="password1"
               name="password1"
-              type="password"
               ref={register({
-                required: 'Required',
+                required: '필수입력사항 입니다.',
               })}
               placeholder="비밀번호를 입력해주세요"
             />
           </div>
-          <div>
-            <label htmlFor="password2">비밀번호 확인　</label>
+          <div className="col">
+            <label htmlFor="password2">비밀번호 확인</label>
             <input
-              id="password2"
-              name="password2"
               type="password"
+              name="password2"
+              id="password2"
               ref={register({
-                required: 'Required',
+                required: '필수입력사항 입니다.',
                 validate: value => {
                   return value === watch('password1');
                 },
               })}
               placeholder="비밀번호를 입력해주세요"
             />
+            <p className="notice">
+              {errors.password2 && '비밀번호가 일치하지 않습니다.'}
+            </p>
           </div>
-
-          {errors.password2 && '비밀번호가 일치하지 않습니다.'}
-
-          <button type="submit">회원가입</button>
         </fieldset>
+        <button type="submit" className="submit-btn">
+          확인
+        </button>
       </form>
-    </section>
+    </h2>
   );
 };
 

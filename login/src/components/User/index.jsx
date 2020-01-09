@@ -9,8 +9,8 @@ const User = props => {
   const key = process.env.REACT_APP_JWT_KEY;
 
   useEffect(() => {
-    const res = jwt.verify(session, key);
-    setUsername(res.username);
+    const decoded = jwt.verify(session, key);
+    setUsername(decoded.username);
   }, []);
 
   const logOut = () => {

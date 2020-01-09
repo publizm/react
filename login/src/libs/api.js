@@ -24,5 +24,6 @@ export const signOut = async session => {
   const { data } = await axios.get('http://localhost:4000/api/signout', {
     headers,
   });
-  console.log(data);
+
+  return data;
 };

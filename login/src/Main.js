@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Main = props => {
+const Main = () => {
   return (
     <>
       <ul className="navigation">

@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { signOut } from '../../libs/api';
+import { useAuthed } from '../../libs/hooks';
 import jwt from 'jsonwebtoken';
 
 const User = props => {
-  const session = Cookies.get('session');
   const [username, setUsername] = useState('');
-  const key = process.env.REACT_APP_JWT_KEY;
+  // Authed로 인해 User에서 따로 verify를 할 필요가 없어졌다.
+  const { username: user } = useAuthed();
 
   useEffect(() => {
-    const decoded = jwt.verify(session, key);
-    setUsername(decoded.username);
+    setUsername(user);
   }, []);
 
   const logOut = () => {
+    const session = Cookies.get('session');
+
     signOut(session);
     Cookies.remove('session');
     props.history.push('/');

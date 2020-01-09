@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Main = props => {
   return (
@@ -13,7 +13,6 @@ const Main = props => {
         </li>
       </ul>
       <h2>메인입니다</h2>
-      <button className="signout-btn">로그아웃</button>
     </>
   );
 };

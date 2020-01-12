@@ -4,13 +4,13 @@ import { signOut } from '../../libs/api';
 import { useAuthed } from '../../libs/hooks';
 
 const User = props => {
-  console.log('user', props);
   const [username, setUsername] = useState('');
   // Authed로 인해 User에서 따로 verify를 할 필요가 없어졌다.
-  const { username: user } = useAuthed();
+  const authued = useAuthed();
+  console.log(authued);
 
   useEffect(() => {
-    setUsername(user);
+    setUsername(authued.username);
   }, []);
 
   const logOut = () => {

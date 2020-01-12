@@ -50,7 +50,7 @@ const App = () => {
       <Switch>
         <UnAuthedRoute path="/signup" component={SignUp} />
         <UnAuthedRoute path="/signin" component={SignIn} />
-        <AuthedRoute path="/user" a={'hello'} component={User} />
+        <AuthedRoute path="/user" component={User} />
         <Route path="/" component={Main} />
       </Switch>
     </Router>

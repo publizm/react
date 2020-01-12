@@ -5,8 +5,9 @@ function Test() {
   const [name, setName] = useState('publee');
 
   useEffect(() => {
-    setName(name => (name = 'CheolHwan'));
-  }, []);
+    setName('CheolddHwan');
+    console.log(name);
+  }, [name]);
 
   return (
     <div>

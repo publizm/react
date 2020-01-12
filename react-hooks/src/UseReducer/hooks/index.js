@@ -80,6 +80,7 @@ export const useHistory = initialPresent => {
     [dispatch],
   );
 
+  // TODO: 모든 참조를 의존성배열에 나열하는 것이 권장사항이다. 상태가 변하는 것 X
   const undo = useCallback(() => {
     if (canUndo) {
       dispatch({ type: 'UNDO' });

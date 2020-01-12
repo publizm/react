@@ -8,7 +8,6 @@ const SignUp = props => {
 
   const onSubmit = async values => {
     const { success, msg } = await signUp(values);
-    console.log(success, msg);
     if (success) {
       props.history.push('/signin');
     } else if (msg === 'Username already exists.') {
@@ -68,9 +67,7 @@ const SignUp = props => {
             })}
             placeholder="비밀번호를 입력해주세요"
           />
-          <p className="notice">
-            {errors.password2 && '비밀번호가 일치하지 않습니다.'}
-          </p>
+          <p className="notice">{errors.password2 && '비밀번호가 일치하지 않습니다.'}</p>
         </div>
       </fieldset>
       <button type="submit" className="submit-btn">

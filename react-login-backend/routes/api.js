@@ -35,7 +35,10 @@ router.post('/signin', function(req, res) {
       if (err) throw err;
 
       if (!user) {
-        res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
+        res.status(401).send({
+          success: false,
+          msg: 'Authentication failed. User not found.',
+        });
       } else {
         // check if password matches
         user.comparePassword(req.body.password, function(err, isMatch) {
@@ -47,10 +50,13 @@ router.post('/signin', function(req, res) {
             // return the information including token as JSON
             // 쿠키에 세션을 저장해준다.
             // 백엔드에서 클라이언트에 결과를 보낼때 쿠키를 써줘서 결과만 보내주는 로직
-            res.cookie('session', token);
+            // res.cookie('session', token);
             res.json({ success: true, token: 'JWT ' + token });
           } else {
-            res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+            res.status(401).send({
+              success: false,
+              msg: 'Authentication failed. Wrong password.',
+            });
           }
         });
       }
@@ -58,12 +64,19 @@ router.post('/signin', function(req, res) {
   );
 });
 
-router.get('/signout', passport.authenticate('jwt', { session: false }), function(req, res) {
-  req.logout();
-  res.json({ success: true, msg: 'Sign out successfully.' });
-});
+router.get(
+  '/signout',
+  passport.authenticate('jwt', { session: false }),
+  function(req, res) {
+    req.logout();
+    res.json({ success: true, msg: 'Sign out successfully.' });
+  },
+);
 
-router.post('/user', passport.authenticate('jwt', { session: false }), function(req, res) {
+router.post('/user', passport.authenticate('jwt', { session: false }), function(
+  req,
+  res,
+) {
   var token = getToken(req.headers);
   if (token) {
     console.log(req.body);
@@ -85,7 +98,10 @@ router.post('/user', passport.authenticate('jwt', { session: false }), function(
   }
 });
 
-router.get('/user', passport.authenticate('jwt', { session: false }), function(req, res) {
+router.get('/user', passport.authenticate('jwt', { session: false }), function(
+  req,
+  res,
+) {
   var token = getToken(req.headers);
   if (token) {
     Book.find(function(err, books) {

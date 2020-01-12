@@ -40,9 +40,9 @@ const App = () => {
       setHistory([...history, `${wins} - 컴퓨터: ${computerPick}, 유저: ${myPick}`]); // wins을 쓰게되면 이전 상태가 올라가서 X
 
       if (wins === '컴퓨터 승리') {
-        setComputerWins(prev => prev + 1);
+        setComputerWins(computerWins + 1);
       } else if (wins === '유저 승리') {
-        setUserWins(prev => prev + 1);
+        setUserWins(userWins + 1);
       }
     }
   }, [myPick, computerPick]);

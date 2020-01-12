@@ -4,6 +4,8 @@ const App = () => {
   const [myPick, setMyPick] = useState('');
   const [computerPick, setComputerPick] = useState('');
   const [wins, setWins] = useState('');
+  const [computerWins, setComputerWins] = useState(0);
+  const [userWins, setUserWins] = useState(0);
   const [history, setHistory] = useState([]);
   const select = useRef();
 
@@ -36,6 +38,12 @@ const App = () => {
     if (wins) {
       setWins(wins);
       setHistory([...history, `${wins} - 컴퓨터: ${computerPick}, 유저: ${myPick}`]); // wins을 쓰게되면 이전 상태가 올라가서 X
+
+      if (wins === '컴퓨터 승리') {
+        setComputerWins(prev => prev + 1);
+      } else if (wins === '유저 승리') {
+        setUserWins(prev => prev + 1);
+      }
     }
   }, [myPick, computerPick]);
 
@@ -45,7 +53,11 @@ const App = () => {
 
   return (
     <div>
-      {wins}
+      <h2>{wins}</h2>
+      <h3>
+        유저 승리 횟수 : {userWins} vs 컴퓨터 승리 횟수 : {computerWins}
+      </h3>
+
       <select ref={select} onChange={runGame}>
         <option value="가위">가위</option>
         <option value="바위">바위</option>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { signOut } from '../../libs/api';
 import { useAuthed } from '../../libs/hooks';
-import jwt from 'jsonwebtoken';
 
 const User = props => {
   console.log('user', props);

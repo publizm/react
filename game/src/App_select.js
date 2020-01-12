@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const App = () => {
   const [myPick, setMyPick] = useState('');
   const [computerPick, setComputerPick] = useState('');
   const [wins, setWins] = useState('');
+  const select = useRef();
 
-  const runGame = value => {
+  const runGame = () => {
+    const value = select.current.value;
     const items = ['가위', '바위', '보'];
     const randomIdx = Math.floor(Math.random() * items.length);
     setMyPick(value);
@@ -31,9 +33,11 @@ const App = () => {
   return (
     <div>
       {wins}
-      <button onClick={() => runGame('가위')}>가위</button>
-      <button onClick={() => runGame('바위')}>바위</button>
-      <button onClick={() => runGame('보')}>보</button>
+      <select ref={select} onChange={runGame}>
+        <option value="가위">가위</option>
+        <option value="바위">바위</option>
+        <option value="보">보</option>
+      </select>
     </div>
   );
 };

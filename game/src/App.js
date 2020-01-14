@@ -13,6 +13,8 @@ const App = () => {
     const value = select.current.value;
     const items = ['가위', '바위', '보'];
     const randomIdx = Math.floor(Math.random() * items.length);
+    // TODO: set이 보이면 멈추고 리렌더링 되는게 아니라 일단 아래의 모든 훅을 한번씩 돈다.
+    // 사이클을 계속 돈다고해서 먼저 SET한 값이 업데이트 되는 것이 아니다. 다음 사이클에서 업데이트가 반영된다.
     setMyPick(value);
     setComputerPick(items[randomIdx]);
   };

@@ -1,18 +1,4 @@
-import React, { useState, useEffect, useRef, useReducer } from 'react';
-
-const reducer = (state, action) => {
-  console.log(state);
-  switch (action.type) {
-    case 'ADD':
-      return {
-        ...state,
-        history: !state.history ? [action.prevHistory] : [action.prevHistory, ...state.history],
-      };
-
-    default:
-      break;
-  }
-};
+import React, { useState, useEffect, useRef } from 'react';
 
 const App = () => {
   const [myPick, setMyPick] = useState('');
@@ -20,8 +6,7 @@ const App = () => {
   const [wins, setWins] = useState('');
   const [computerWins, setComputerWins] = useState(0);
   const [userWins, setUserWins] = useState(0);
-  const [state, dispatch] = useReducer(reducer, []);
-
+  const [history, setHistory] = useState([]);
   const select = useRef();
 
   const runGame = () => {
@@ -48,9 +33,11 @@ const App = () => {
       if (computerPick === '보') wins = '무승부';
     }
 
+    console.log('wins', wins);
+
     if (wins) {
       setWins(wins);
-      dispatch({ type: 'ADD', prevHistory: `${wins} - 컴퓨터: ${computerPick}, 유저: ${myPick}` });
+      setHistory([...history, `${wins} - 컴퓨터: ${computerPick}, 유저: ${myPick}`]);
 
       if (wins === '컴퓨터 승리') {
         setComputerWins(computerWins + 1);
@@ -60,7 +47,10 @@ const App = () => {
     }
   }, [myPick, computerPick]);
 
-  const { history } = state;
+  useEffect(() => {
+    console.log(history);
+  }, [history]);
+
   return (
     <div>
       <h2>{wins}</h2>
@@ -73,7 +63,9 @@ const App = () => {
         <option value="바위">바위</option>
         <option value="보">보</option>
       </select>
-      {history && history.map((content, index) => <h2 key={index}>{content}</h2>)}
+      {history.map((content, index) => (
+        <h2 key={index}>{content}</h2>
+      ))}
     </div>
   );
 };

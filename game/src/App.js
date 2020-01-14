@@ -8,19 +8,35 @@ const reducer = (state, action) => {
         ...state,
         history: !state.history ? [action.prevHistory] : [action.prevHistory, ...state.history],
       };
+    case 'RESULT':
+      let currentUserWins;
+      let currentComWins;
+      console.log(currentUserWins, currentComWins, action.winner);
+      if (action.winner === '컴퓨터 승리') currentComWins = state.comWins ? state.comWins + 1 : 1;
+      if (action.winner === '유저 승리') currentUserWins = state.userWins ? state.userWins + 1 : 1;
+      return {
+        ...state,
+        comWins: currentComWins || state.comWins,
+        userWins: currentUserWins || state.userWins,
+      };
+
+    case 'RESET':
+      return init();
 
     default:
       break;
   }
 };
 
+const init = () => {
+  return {};
+};
+
 const App = () => {
   const [myPick, setMyPick] = useState('');
   const [computerPick, setComputerPick] = useState('');
   const [wins, setWins] = useState('');
-  const [computerWins, setComputerWins] = useState(0);
-  const [userWins, setUserWins] = useState(0);
-  const [state, dispatch] = useReducer(reducer, []);
+  const [state, dispatch] = useReducer(reducer, {}, init);
 
   const select = useRef();
 
@@ -51,21 +67,20 @@ const App = () => {
     if (wins) {
       setWins(wins);
       dispatch({ type: 'ADD', prevHistory: `${wins} - 컴퓨터: ${computerPick}, 유저: ${myPick}` });
-
-      if (wins === '컴퓨터 승리') {
-        setComputerWins(computerWins + 1);
-      } else if (wins === '유저 승리') {
-        setUserWins(userWins + 1);
-      }
+      dispatch({ type: 'RESULT', winner: wins });
     }
   }, [myPick, computerPick]);
 
-  const { history } = state;
+  useEffect(() => {
+    console.log('state', state);
+  }, [state]);
+
+  const { history, comWins, userWins } = state;
   return (
     <div>
       <h2>{wins}</h2>
       <h3>
-        유저 승리 횟수 : {userWins} vs 컴퓨터 승리 횟수 : {computerWins}
+        유저 승리 횟수 : {userWins || 0} vs 컴퓨터 승리 횟수 : {comWins || 0}
       </h3>
 
       <select ref={select} onChange={runGame}>
@@ -73,6 +88,7 @@ const App = () => {
         <option value="바위">바위</option>
         <option value="보">보</option>
       </select>
+      <button onClick={() => dispatch({ type: 'RESET' })}>History 초기화</button>
       {history && history.map((content, index) => <h2 key={index}>{content}</h2>)}
     </div>
   );

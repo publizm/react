@@ -2,13 +2,10 @@ import React from 'react';
 import classNames from 'classnames';
 import './Button.scss';
 
-const Button2 = ({ children, active, size, onActive }) => {
+const Button2 = ({ children, active, size, ...rest }) => {
   console.log(size);
   return (
-    <button
-      className={classNames('button', size, { active })}
-      onClick={onActive}
-    >
+    <button className={classNames('button', size, { active })} {...rest}>
       {children}
     </button>
   );

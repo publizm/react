@@ -8,8 +8,9 @@ import UseCallback from './UseCallback/useCallback';
 import UseMemo from './UseMemo/useMemo';
 import Test from './test';
 import UseReducer from './UseReducer/UseReducer';
+import AppContext from './AppContext';
 
-ReactDOM.render(<UseReducer />, document.getElementById('root'));
+ReactDOM.render(<AppContext />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

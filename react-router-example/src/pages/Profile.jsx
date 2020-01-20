@@ -6,7 +6,13 @@ import { useParams } from 'react-router-dom';
 //   return (
 //     <div>
 //       Profile
-//       <div>{id && <p>id: {(id, typeof id)}</p>}</div>
+//       <div>
+//         {id && (
+//           <p>
+//             id: {id} {typeof id}
+//           </p>
+//         )}
+//       </div>
 //     </div>
 //   );
 // };
@@ -16,7 +22,13 @@ const Profile = () => {
   return (
     <div>
       Profile
-      <div>{id && <p>id: {(id, typeof id)}</p>}</div>
+      <div>
+        {id && (
+          <p>
+            id: {id} {typeof id}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

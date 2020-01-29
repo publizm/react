@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PersonContext from '../contexts/PersonContext';
 
-export class Example2 extends Component {
-  // Type 사용방법 1
-  static contextType = PersonContext;
-
-  render() {
-    return <div>{JSON.stringify(this.context)}</div>;
-    // this.context가 value의 값이 된다
-  }
-}
-
-// Type 사용방법 2
-// Example2.contextType = PersonContext;
+// 함수형 컴포넌트에서 consumer를 이용한 방법
+const Example2 = props => {
+  return (
+    <div>
+      <PersonContext.Consumer>
+        {value =>
+          value.persons.map((val, index) => (
+            <p key={index}>{JSON.stringify(val)}</p>
+          ))
+        }
+      </PersonContext.Consumer>
+    </div>
+  );
+};
 
 export default Example2;

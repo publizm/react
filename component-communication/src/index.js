@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import PersonContext from './contexts/PersonContext';
+import AreaContext from './contexts/AreaContext';
 
-const persons = [
-  { id: 0, name: 'mark', age: 38 },
-  { id: 1, name: 'hanna', age: 27 },
-];
+// ReactDOM.render(<App />, document.getElementById('root'));
+
+const area = {
+  nation: 'KOR',
+  region: 'Seoul',
+};
 
 ReactDOM.render(
-  <PersonContext.Provider value={persons}>
+  <AreaContext.Provider value={area}>
     <App />
-  </PersonContext.Provider>,
+  </AreaContext.Provider>,
   document.getElementById('root'),
 );
 

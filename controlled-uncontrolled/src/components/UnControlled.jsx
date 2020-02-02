@@ -38,6 +38,10 @@ export class UnControlled extends Component {
 //     this.state = {};
 //   }
 
+//   click = () => {
+//     console.log(this.input.value);
+//   };
+
 //   input;
 
 //   render() {
@@ -55,11 +59,6 @@ export class UnControlled extends Component {
 //       </div>
 //     );
 //   }
-
-//   click = () => {
-//     console.log(this.inputRef);
-//     console.log(this.inputRef.current.value);
-//   };
 // }
 
 export default UnControlled;

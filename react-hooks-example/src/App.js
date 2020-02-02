@@ -26,12 +26,12 @@ function App({ hasMounted }) {
         <p>{hasMounted && 'mounted'}</p>
         <p>{hasMounted2 && 'hasMounted2'}</p>
         <img src={logo} className="App-logo" alt="logo" />
-        <Example1 />
+        {/* <Example1 />
         <Example2 />
         <Example3 />
         <Example4 />
         <Example8 />
-        <Example9 />
+        <Example9 /> */}
         <Example10 />
         {/* <Example11 /> */}
       </header>

@@ -8,10 +8,12 @@ const Example9 = () => {
   ]);
 
   function change(e) {
+    console.log('change');
     setValue(e.target.value);
   }
 
   function getSum(persons) {
+    console.log('getSum');
     return persons.map(person => person.age).reduce((a, b) => a + b, 0);
   }
 

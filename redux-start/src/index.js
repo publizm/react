@@ -20,7 +20,8 @@ import store from './store';
 // store.dispatch(addTodo('병원가기'));
 // store.dispatch(addTodo('학원가기'));
 
-// react-redux 사용없이 react 연결
+// react-redux 사용없이 react 연결해보기
+// 어찌됬건 props로 store를 계속 내려줘야하므로, 장점이 딱히 없음
 // store에 변동이 생기면 subscribe를 활용하여 제 랜더링
 
 store.subscribe(() => {

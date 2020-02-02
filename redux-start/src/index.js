@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 import store from './store';
+import ReduxContext from './contexts/ReduxContext';
 // import { addTodo } from './actions';
-// import ReduxContext from './contexts/ReduxContext';
 
 // console.log(store);
 
@@ -24,8 +23,17 @@ import store from './store';
 // 어찌됬건 props로 store를 계속 내려줘야하므로, 장점이 딱히 없음
 // store에 변동이 생기면 subscribe를 활용하여 제 랜더링
 
-store.subscribe(() => {
-  ReactDOM.render(<App store={store} />, document.getElementById('root'));
-});
+// store.subscribe(() => {
+//   ReactDOM.render(<App store={store} />, document.getElementById('root'));
+// });
 
-ReactDOM.render(<App store={store} />, document.getElementById('root'));
+// ReactDOM.render(<App store={store} />, document.getElementById('root'));
+
+// contextAPI 활용
+// reducer의 집합이 담긴 store를 ReduxContext의 value로 지정하여 Provider를 통해 하위 컴포넌트에 전달
+ReactDOM.render(
+  <ReduxContext.Provider value={store}>
+    <App />
+  </ReduxContext.Provider>,
+  document.getElementById('root'),
+);

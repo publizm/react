@@ -11,14 +11,10 @@ export function todos(state = initialState, action) {
   } else if (action.type === COMPLETE_TODO) {
     const newTodos = [...state];
 
-    for (let i = 0; i < newTodos.length; i++) {
-      if (i === action.index) {
-        newTodos[i] = {
-          ...newTodos[i],
-          done: true,
-        };
-      }
-    }
+    newTodos[action.index] = {
+      ...newTodos[action.index],
+      done: true,
+    };
 
     return newTodos;
   }

@@ -13,4 +13,8 @@ export const completeTodo = index => ({ type: COMPLETE_TODO, index });
 
 export const START_LOADING = 'START_LOADING';
 
-const startLoading = () => ({ type: START_LOADING });
+export const startLoading = () => ({ type: START_LOADING });
+
+export const END_LOADING = 'END_LOADING';
+
+export const endLoading = () => ({ type: END_LOADING });

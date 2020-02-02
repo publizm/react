@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import store from './store';
-import ReduxContext from './contexts/ReduxContext';
+// import ReduxContext from './contexts/ReduxContext';
 // import { addTodo } from './actions';
+import { Provider } from 'react-redux';
 
 // console.log(store);
 
@@ -29,11 +30,19 @@ import ReduxContext from './contexts/ReduxContext';
 
 // ReactDOM.render(<App store={store} />, document.getElementById('root'));
 
-// contextAPI 활용
+// react-redux없이 contextAPI와 redux를 활용한 예시
 // reducer의 집합이 담긴 store를 ReduxContext의 value로 지정하여 Provider를 통해 하위 컴포넌트에 전달
+// ReactDOM.render(
+//   <ReduxContext.Provider value={store}>
+//     <App />
+//   </ReduxContext.Provider>,
+//   document.getElementById('root'),
+// );
+
+// react-redux와 redux를 활용한 예시
 ReactDOM.render(
-  <ReduxContext.Provider value={store}>
+  <Provider store={store}>
     <App />
-  </ReduxContext.Provider>,
+  </Provider>,
   document.getElementById('root'),
 );

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import qs from 'query-string';
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 function Test() {
-  const [completed, setCompleted] = useState(0);
+  const [session, setSession] = useState(null);
 
   const header = {
     headers: {
@@ -16,6 +15,7 @@ function Test() {
 
   const getData = async () => {
     const sessionKey = await createSession();
+    let prevAgentsLength = null;
 
     while (true) {
       const config = {
@@ -27,7 +27,7 @@ function Test() {
         params: {
           'sortType': 'price',
           'pageIndex': '0',
-          'pageSize': '20',
+          'pageSize': '100',
         },
       };
 
@@ -38,20 +38,56 @@ function Test() {
         { headers: config.headers },
       );
 
-      const agentLength = data.Agents.length;
-      const compoleteLength = data.Agents.filter(
-        agent => agent.Status === 'UpdatesComplete',
-      ).length;
+      // priceOptions > agent 값 가져오기
+      const agents = [
+        ...new Set(
+          [
+            ...data.Itineraries.map(item =>
+              item.PricingOptions.map(agent => agent.Agents[0]),
+            ),
+          ].reduce((pre, cur) => {
+            pre.push(...cur);
+            return pre;
+          }, []),
+        ),
+      ];
+      console.log(data);
+      const agentIds = data.Agents.map(agent => agent.Id);
 
-      setCompleted(Math.floor((compoleteLength / agentLength) * 100));
+      // 이전의 agents length 체크
+      if (prevAgentsLength !== agents.length) {
+        prevAgentsLength = agents.length;
+      }
+      // console.log(agents.length);
+      // console.log(prevAgentsLength, agents.length);
 
-      console.log('PENDING', data);
+      console.log('Agent의 Id 값', agentIds);
+      console.log('Itineraries의 PriceOptions의 agent 모음', agents);
+
+      let count = 0;
+      let completed = 0;
+
+      let per = 100 / agents.length;
+
+      agents.forEach(agent => {
+        if (agentIds.includes(agent) && completed !== 100) {
+          count += 1;
+          completed += per;
+        }
+      });
+      console.log('count', count);
+      console.log(completed + '%');
+      // console.log('PENDING', [...agents].length / 100);
+
+      // let per = 100 / [...agents].length;
+      // [...agent]
+      // num += num;
+
+      // console.log('PENDING_agentIds', agentIds);
 
       if (data.Status === 'UpdatesComplete') {
         console.log('COMPLETED');
         console.log('COMPLETED', data);
-        console.log(agentLength, compoleteLength);
-        setCompleted(100);
         return;
       }
     }
@@ -90,30 +126,8 @@ function Test() {
     return sessionKey[sessionKey.length - 1];
   };
 
-  useEffect(() => {
-    function progress() {
-      setCompleted(oldCompleted => {
-        if (oldCompleted === 100) {
-          return 100;
-        }
-        return Math.min(oldCompleted, 100);
-      });
-    }
-
-    const timer = setInterval(progress, 500);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
   return (
     <div>
-      <LinearProgress variant="determinate" value={completed} />
-      <LinearProgress
-        variant="determinate"
-        value={completed}
-        color="secondary"
-      />
       <button onClick={getData}>검색</button>
     </div>
   );

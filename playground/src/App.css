@@ -1,3 +1,6 @@
+body {
+  margin: 40px;
+}
 .App {
   text-align: center;
 }
@@ -35,4 +38,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.DateInput {
+  width: 200px;
+}
+
+.DateRangePickerInput_arrow {
+  width: 40px;
+  text-align: center;
 }
